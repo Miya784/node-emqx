@@ -1,6 +1,5 @@
-
-const axios = require("axios");
-const dotenv = require("dotenv");
+import axios from "axios";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -20,4 +19,4 @@ const API = axios.create({
   }
 });
 
-module.exports = { API };
+export { API };

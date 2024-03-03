@@ -1,13 +1,12 @@
-
-const bcrypt = require("bcrypt");
-const { User, Client } = require("../models/user.model.js");
-const { post: emqxPost } = require("../services/emqx-api.js");
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+import bcrypt from "bcrypt";
+import { User, Client } from "../models/user.model.js";
+import { post as emqxPost } from "../services/emqx-api.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -76,7 +75,7 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -126,5 +125,3 @@ const login = async (req, res) => {
     });
   }
 };
-
-module.exports = { login, register };

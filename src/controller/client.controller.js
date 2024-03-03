@@ -1,5 +1,4 @@
-
-const { User, Client } = require("../models/user.model.js");
+import { User, Client } from '../models/user.model.js';
 
 const addClient = async (req, res) => {
   try {
@@ -93,4 +92,4 @@ const getClients = async (req, res) => {
   }
 };
 
-module.exports = { addClient, getClients };
+export { addClient, getClients };
