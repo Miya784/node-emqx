@@ -18,6 +18,6 @@ app.use('/client', publishRoutes);
 
 const PORT = process.env.PORT || '3000';
 app.listen(PORT, async () => {
-  await dbConfig.sequelize.sync();
+  await dbConfig.sequelize. sync({ force: false });
   console.log(`Server is running on port ${PORT}`);
 });

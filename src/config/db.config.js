@@ -17,5 +17,6 @@ export const sequelize = new Sequelize(dbURL, {
   timezone: "+07:00"
 });
 
-
-export default sequelize;
+const db = {};
+db.sequelize = sequelize;
+export default db;
