@@ -1,0 +1,8 @@
+{
+  "name": "node-emqx",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Miya784/node-emqx.git",
+  "author": "burhan <9burhanjehloh@gmail.com>",
+  "license": "MIT"
+}
