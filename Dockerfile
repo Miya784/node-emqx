@@ -8,11 +8,12 @@ WORKDIR /app
 COPY . .
 
 # Set NODE_ENV to 'production'
+ENV NODE_ENV production
 
 # Build the TypeScript application in the builder stage
-RUN yarn build
+RUN yarn install --frozen-lockfile
 
-ENV NODE_ENV production
+RUN yarn build
 
 # Stage 3: Runner
 FROM node:18.18-alpine AS runner
