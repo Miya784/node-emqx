@@ -7,11 +7,12 @@ WORKDIR /app
 # Copy the rest of your application source code to the builder stage
 COPY . .
 
+RUN yarn install --frozen-lockfile
+
 # Set NODE_ENV to 'production'
 ENV NODE_ENV production
 
 # Build the TypeScript application in the builder stage
-RUN yarn install --frozen-lockfile
 
 RUN yarn build
 
