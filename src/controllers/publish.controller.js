@@ -16,7 +16,7 @@ export const publish = async (req, res) => {
     }
     const client = await Client.findOne({ where: { client: topic } });
     if (!client) {
-      res.status(404).send("User not found.");
+      res.status(401).json({ error: 'Unauthorized. client not provided.' });
       return;
     }
     // Verify and decode the token
