@@ -1,9 +1,9 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const dbConfig = require("./src/config/db.config.js");
-const authRoutes = require("./src/routes/auth.routes.js");
-const publishRoutes = require("./src/routes/publish.routes.js");
-const dotenv = require("dotenv");
+import express from "express";
+import bodyParser from "body-parser";
+import dbConfig from "./src/config/db.config.mjs";
+import authRoutes from "./src/routes/auth.routes.mjs";
+import publishRoutes from "./src/routes/publish.routes.mjs";
+import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
