@@ -2,7 +2,7 @@
 import { API } from '../services/emqx-api.js'; 
 import { Client } from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+const dotenv = require("dotenv");
 // import { stack } from 'sequelize/types/utils.js';
 dotenv.config();
 

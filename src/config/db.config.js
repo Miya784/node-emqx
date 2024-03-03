@@ -1,10 +1,8 @@
 
 import { Sequelize } from "sequelize";
-const dotenv = require("dotenv");
 
-dotenv.config();
-const dbURL = process.env.DB_URL || "postgres://burhan:burhan7730@localhost/burhan";
-const sequelize = new Sequelize(dbURL, {
+const dbURL = process.env.DB_URL || "postgres://postgres:postgres@localhost:5432/postgres";
+export const sequelize = new Sequelize(dbURL, {
   pool: {
     max: 5,
     min: 0,
@@ -19,4 +17,5 @@ const sequelize = new Sequelize(dbURL, {
   timezone: "+07:00"
 });
 
-module.exports = { sequelize };
+
+export default sequelize;

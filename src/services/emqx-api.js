@@ -1,7 +1,4 @@
 import axios from "axios";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const emqxBaseUrl = process.env.APIKEY_URL; // Replace with your EMQX server URL
 const username = process.env.APIKEY; // Replace with your API key

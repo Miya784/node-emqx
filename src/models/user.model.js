@@ -34,4 +34,4 @@ const Client = sequelize.define("Client", {
   paranoid: true
 });
 
-module.exports = { User, Client };
+export { User, Client };

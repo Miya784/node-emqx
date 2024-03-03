@@ -1,10 +1,7 @@
 import bcrypt from "bcrypt";
 import { User, Client } from "../models/user.model.js";
-import { post as emqxPost } from "../services/emqx-api.js";
+import { API } from "../services/emqx-api.js";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 export const register = async (req, res) => {
   try {
@@ -43,7 +40,7 @@ export const register = async (req, res) => {
     });
 
     // Call EMQX API to create the user
-    const response = await emqxPost(process.env.API_AUTHEN, {
+    const response = await API(process.env.API_AUTHEN, {
       password: password,
       user_id: username
     }, {

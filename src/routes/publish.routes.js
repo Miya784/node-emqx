@@ -7,4 +7,4 @@ const router = express.Router();
 router.post('/publish', publish);
 router.post('/addclient', addClient);
 
-module.exports = router;
+export default router;
