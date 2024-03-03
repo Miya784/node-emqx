@@ -1,7 +1,8 @@
 
 import { Sequelize } from "sequelize";
+import { config } from "./loadenv.js";
 
-const dbURL = process.env.DB_URL || "postgres://postgres:postgres@localhost:5432/postgres";
+const dbURL = config.DB_URL || "postgres://postgres:postgres@localhost:5432/postgres";
 export const sequelize = new Sequelize(dbURL, {
   pool: {
     max: 5,

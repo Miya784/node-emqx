@@ -1,15 +1,12 @@
 import axios from "axios";
-
-const emqxBaseUrl = process.env.APIKEY_URL; // Replace with your EMQX server URL
-const username = process.env.APIKEY; // Replace with your API key
-const password = process.env.APIKEY_PASS;
+import { config } from "../config/loadenv.js";
 
 const API = axios.create({
-  baseURL: emqxBaseUrl,
+  baseURL: config.APIKEY_URL,
   timeout: 1000,
   auth: {
-    username,
-    password
+    username: config.APIKEY,
+    password: config.APIKEY_PASS
   },
   headers: {
     "content-type": "application/json"

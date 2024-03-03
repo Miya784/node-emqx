@@ -1,19 +1,20 @@
 // auth.controller.js
-import { API } from '../services/emqx-api.js'; 
+import { API } from '../services/emqx-api.js';
 import { Client } from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
+import { config } from '../config/loadenv.js';
 
 export const publish = async (req, res) => {
   try {
     const { topic, payload } = req.body;
-    
+
     // Check if the Authorization header is present
     const token = req.headers.authorization;
 
     if (!token) {
       return res.status(401).json({ error: 'Unauthorized. Token not provided.' });
     }
-    const client = await Client.findOne({where:{client:topic}});
+    const client = await Client.findOne({ where: { client: topic } });
     if (!client) {
       res.status(404).send("User not found.");
       return;
@@ -26,7 +27,7 @@ export const publish = async (req, res) => {
 
       // Example: Publish a message to a topic
       API.post(
-        process.env.API_PUBLISH, // Adjust the endpoint based on your EMQX version
+        config.API_PUBLISH, // Adjust the endpoint based on your EMQX version
         {
           topic,
           payload: JSON.stringify(payload),
@@ -37,13 +38,13 @@ export const publish = async (req, res) => {
           headers: { "Content-Type": "application/json" },
         }
       )
-      .then((publishResponse) => {
-        res.json(publishResponse.data);
-      })
-      .catch((error) => {
-        console.error('Error during publish:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-      });
+        .then((publishResponse) => {
+          res.json(publishResponse.data);
+        })
+        .catch((error) => {
+          console.error('Error during publish:', error);
+          res.status(500).json({ error: 'Internal Server Error' });
+        });
     });
   } catch (error) {
     console.error('Error during publish:', error);

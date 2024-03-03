@@ -3,10 +3,7 @@ import bodyParser from "body-parser";
 import dbConfig from "./src/config/db.config.js";
 import authRoutes from "./src/routes/auth.routes.js";
 import publishRoutes from "./src/routes/publish.routes.js";
-import dotenv from "dotenv";
-
-dotenv.config();
-
+import { config } from "./src/config/loadenv.js";
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,8 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/auth', authRoutes);
 app.use('/client', publishRoutes);
 
-const PORT = process.env.PORT || '3000';
+const PORT = config.PORT || '3000';
 app.listen(PORT, async () => {
-  await dbConfig.sequelize. sync({ force: false });
+  await dbConfig.sequelize.sync({ force: true });
   console.log(`Server is running on port ${PORT}`);
 });

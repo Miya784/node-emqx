@@ -6,7 +6,6 @@
   "author": "burhan <9burhanjehloh@gmail.com>",
   "license": "MIT",
   "type": "module",
-  "sourcepath": ".",
   "scripts": {
     "start": "nodemon dist/index.js",
     "build": "babel index.js -d dist && babel src -d dist/src",
