@@ -8,10 +8,11 @@ WORKDIR /app
 COPY . .
 
 # Set NODE_ENV to 'production'
-ENV NODE_ENV production
 
 # Build the TypeScript application in the builder stage
 RUN yarn build
+
+ENV NODE_ENV production
 
 # Stage 3: Runner
 FROM node:18.18-alpine AS runner
