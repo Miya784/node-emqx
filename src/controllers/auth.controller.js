@@ -41,7 +41,7 @@ export const register = async (req, res) => {
     });
 
     // Call EMQX API to create the user
-    const response = await API(config.API_AUTHEN, {
+    const response = await API.post(config.API_AUTHEN, {
       password: password,
       user_id: username
     }, {
