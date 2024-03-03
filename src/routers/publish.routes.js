@@ -1,7 +1,6 @@
-
-const express = require("express");
-const { publish } = require("../controllers/publish.controller.js");
-const { addClient } = require("../controllers/client.controller.js");
+import express from 'express';
+import { publish } from '../controllers/publish.controller.js';
+import { addClient } from '../controllers/client.controller.js';
 
 const router = express.Router();
 
