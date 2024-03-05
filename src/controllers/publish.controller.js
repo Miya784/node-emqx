@@ -39,8 +39,14 @@ export const publish = async (req, res) => {
         }
       )
         .then((publishResponse) => {
-          res.json(publishResponse.data);
-        })
+          if (publishResponse.status === 200) {
+            res.json(publishResponse.data);
+          } else if (publishResponse.data === "no_matching_subscribers") {
+            res.status(400).json({ error: "No subscribers" });
+          } else {
+            res.status(500).json({ error: "Error in subscribers" });
+          }
+                })
         .catch((error) => {
           console.error('Error during publish:', error);
           res.status(500).json({ error: 'Internal Server Error' });

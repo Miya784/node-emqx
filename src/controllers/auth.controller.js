@@ -101,10 +101,10 @@ export const login = async (req, res) => {
     const userData = {
       userId: user.id,
       username: user.user,
-      client: await Client.findOne({
+      client: await Client.findAll({
         where: {
           userId: user.id
-        }
+        },attributes: ['typeClient', 'client']
       })
     };
 
