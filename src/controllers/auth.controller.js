@@ -108,23 +108,27 @@ export const login = async (req, res) => {
       })
     };
 
-    const resclients = await API.get(`/api/v5/clients?username=${user.user}`)
-    const result = userData.client.dataValues.map((client) => {
-      resclients.data.data.forEach((data) => {
-        if (data.username === userData.username && data.connected === true && userData.client.client === data.clientid) {
-          return { ...client, connected: true }
-        } else {
-          return { ...client, connected: false }
-        }
-      })
-    })
+
+    const resclients = await API.get(`/api/v5/clients?username=${user.user}`);
+    const result = userData.client.map((client) => {
+      const connectedClient = resclients.data.data.find((data) => {
+        return data.username === userData.username && data.connected === true && client.client === data.clientid;
+      });
+      return {
+        typeClient: client.typeClient,
+        client: client.client,
+        connected: connectedClient ? true : false
+      };
+    });
+
+
     // Create a JWT token
-    const token = jwt.sign(userData, 'your_secret_key', {
+    const token = await jwt.sign(userData, 'your_secret_key', {
       expiresIn: '1h'
     });
     return res.status(200).json({
       token,
-      result
+      userData: result
     });
   } catch (error) {
     console.error('Error during login:', error);
