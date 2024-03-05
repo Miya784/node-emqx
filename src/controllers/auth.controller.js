@@ -109,9 +109,9 @@ export const login = async (req, res) => {
     };
 
     const resclients = await API.get(`/api/v5/clients?username=${user.user}`)
-    const result = userData.client.map((client) => {
+    const result = userData.client.dataValues.map((client) => {
       resclients.data.data.forEach((data) => {
-        if (data.username === userData.username && connected === true && userData.client.client === data.clientid) {
+        if (data.username === userData.username && data.connected === true && userData.client.client === data.clientid) {
           return { ...client, connected: true }
         } else {
           return { ...client, connected: false }
