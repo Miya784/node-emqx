@@ -20,16 +20,20 @@ export const topics = async (req, res) => {
         username: user.user,
         client: await Client.findAll({ where: { userId: user.id }, attributes: ['typeClient', 'client'] })
       };
-  console.log(userData)
-      const resclients = await API.get(`/api/v5/clients?username=${username}`);
-      const result = resclients.data.data.map((data) => {
-        const connectedClient = userData.client.find((client) => {
-          return data.username === username && data.connected === true && client.client === data.clientid;
-        });
-        return { client: data.clientid, connected: connectedClient ? true : false };
-      });
+  // console.log(userData)
+    const resclients = await API.get(`/api/v5/clients?username=${user.user}`);
+    const result = userData.client.map((client) => {
+    const connectedClient = resclients.data.data.find((data) => {
+      return data.username === userData.username && data.connected === true && client.client === data.clientid;
+    });
+    return {
+      typeClient: client.typeClient,
+      client: client.client,
+      connected: connectedClient ? true : false
+    };
+  });
   
-      return res.status(200).json(result);
+      return res.status(200).json({userData: result});
     } catch (error) {
       console.error('Error status Client : ', error);
       return res.status(500).json({ error: 'Internal Server Error' });
