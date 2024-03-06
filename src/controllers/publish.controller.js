@@ -57,37 +57,3 @@ export const publish = async (req, res) => {
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
-export const topics = async (req, res) => {
-  try {
-    const { username } = req.query;
-
-    if (!username) {
-      return res.status(400).json({ error: 'Username is required.' });
-    }
-
-    const user = await User.findOne({ where: { user: username } });
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials. User not found.' });
-    }
-
-    const userData = {
-      userId: user.id,
-      username: user.user,
-      client: await Client.findAll({ where: { userId: user.id }, attributes: ['typeClient', 'client'] })
-    };
-
-    // const resclients = await API.get(`/api/v5/clients?username=${username}`);
-    // const result = resclients.data.data.map((data) => {
-    //   const connectedClient = userData.client.find((client) => {
-    //     return data.username === username && data.connected === true && client.client === data.clientid;
-    //   });
-    //   return { connected: connectedClient ? true : false };
-    // });
-
-    return res.status(200).json(userData);
-  } catch (error) {
-    console.error('Error status Client : ', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-};

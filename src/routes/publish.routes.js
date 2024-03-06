@@ -1,5 +1,6 @@
 import express from 'express';
-import { publish,topics } from '../controllers/publish.controller.js';
+import { publish } from '../controllers/publish.controller.js';
+import { topics } from '../controllers/topics.controller.js';
 import { addClient } from '../controllers/client.controller.js';
 
 const router = express.Router();
