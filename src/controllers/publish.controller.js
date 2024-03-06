@@ -1,6 +1,6 @@
 // auth.controller.js
 import { API } from '../services/emqx-api.js';
-import { Client } from '../models/user.model.js';
+import { User, Client } from "../models/user.model.js";
 import jwt from 'jsonwebtoken';
 import { config } from '../config/loadenv.js';
 
@@ -58,30 +58,36 @@ export const publish = async (req, res) => {
   }
 };
 
+export const topics = async (req, res) => {
+  try {
+    const { username } = req.query;
 
-// export const topics = async (req , res ) => {
-//   try {
-//     const { topic ,typeClient} = req.body;
+    if (!username) {
+      return res.status(400).json({ error: 'Username is required.' });
+    }
 
-//     API.post(
-//       process.env.API_TOPICS, // Adjust the endpoint based on your EMQX version
-//       {
-//         topic,
-//         typeClient
-//       },
-//       {
-//         headers: { "Content-Type": "application/json" },
-//       }
-//     )
-//     .then((publishResponse) => {
-//       res.json(publishResponse.data);
-//     })
-//     .catch((error) => {
-//       console.error('Error during publish:', error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     });
-//   }catch(error){
-//     console.error('Error status Client : ',error);
-//     res.status(500).json({error: 'Internal Server Error'});
-//   }
-// };
+    const user = await User.findOne({ where: { user: username } });
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials. User not found.' });
+    }
+
+    const userData = {
+      userId: user.id,
+      username: user.user,
+      client: await Client.findAll({ where: { userId: user.id }, attributes: ['typeClient', 'client'] })
+    };
+
+    // const resclients = await API.get(`/api/v5/clients?username=${username}`);
+    // const result = resclients.data.data.map((data) => {
+    //   const connectedClient = userData.client.find((client) => {
+    //     return data.username === username && data.connected === true && client.client === data.clientid;
+    //   });
+    //   return { connected: connectedClient ? true : false };
+    // });
+
+    return res.status(200).json(userData);
+  } catch (error) {
+    console.error('Error status Client : ', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+};

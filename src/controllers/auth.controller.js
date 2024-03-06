@@ -104,23 +104,10 @@ export const login = async (req, res) => {
       client: await Client.findAll({
         where: {
           userId: user.id
-        }, attributes: ['typeClient', 'client']
+        }, attributes: ['typeClient', 'client'],
+        
       })
     };
-
-
-    const resclients = await API.get(`/api/v5/clients?username=${user.user}`);
-    const result = userData.client.map((client) => {
-      const connectedClient = resclients.data.data.find((data) => {
-        return data.username === userData.username && data.connected === true && client.client === data.clientid;
-      });
-      return {
-        typeClient: client.typeClient,
-        client: client.client,
-        connected: connectedClient ? true : false
-      };
-    });
-
 
     // Create a JWT token
     const token = await jwt.sign(userData, 'your_secret_key', {
@@ -128,7 +115,7 @@ export const login = async (req, res) => {
     });
     return res.status(200).json({
       token,
-      userData: result
+      userData
     });
   } catch (error) {
     console.error('Error during login:', error);
