@@ -1,6 +1,6 @@
 // auth.controller.js
 import { API } from '../services/emqx-api.js';
-import { User, Client } from "../models/user.model.js";
+import {  Client } from "../models/client.model.js";
 import jwt from 'jsonwebtoken';
 import { config } from '../config/loadenv.js';
 

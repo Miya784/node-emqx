@@ -1,4 +1,5 @@
-import { User, Client } from '../models/user.model.js';
+import { User } from '../models/user.model.js';
+import {  Client } from "../models/client.model.js";
 
 const addClient = async (req, res) => {
   try {

@@ -1,4 +1,5 @@
-import { User, Client } from "../models/user.model.js";
+import { User } from "../models/user.model.js";
+import {  Client } from "../models/client.model.js";
 import { API } from '../services/emqx-api.js';
 import { config } from '../config/loadenv.js';
 
@@ -18,7 +19,7 @@ export const topics = async (req, res) => {
       const userData = {
         userId: user.id,
         username: user.user,
-        client: await Client.findAll({ where: { userId: user.id }, attributes: ['typeClient', 'client'] })
+        client: await Client.findAll({ where: { userId: user.id }, attributes: ['typeClient', 'client', 'status'] })
       };
   // console.log(userData)
     const resclients = await API.get(`/api/v5/clients?username=${user.user}`);
@@ -29,7 +30,8 @@ export const topics = async (req, res) => {
     return {
       typeClient: client.typeClient,
       client: client.client,
-      connected: connectedClient ? true : false
+      connected: connectedClient ? true : false,
+      status: client.status
     };
   });
   
