@@ -1,1 +1,1 @@
-[Daigram](/diagram/han.drawio.png))
+[Daigram](/diagram/han.drawio.png?raw=true))
