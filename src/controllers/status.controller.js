@@ -1,3 +1,5 @@
+// src/controllers/stutus.controllers.js
+
 import { Client } from "../models/client.model.js";
 
 export const status = async (req, res) => {

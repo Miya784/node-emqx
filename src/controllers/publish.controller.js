@@ -1,4 +1,4 @@
-// auth.controller.js
+// src/controllers/publish.controllers.js
 import { API } from '../services/emqx-api.js';
 import {  Client } from "../models/client.model.js";
 import jwt from 'jsonwebtoken';

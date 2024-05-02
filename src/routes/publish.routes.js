@@ -1,3 +1,4 @@
+// src/routes/publish.routes.js
 import express from 'express';
 import { publish } from '../controllers/publish.controller.js';
 import { topics } from '../controllers/topics.controller.js';

@@ -1,4 +1,4 @@
-
+// src/config/db.config.js
 import { Sequelize } from "sequelize";
 import { config } from "./loadenv.js";
 

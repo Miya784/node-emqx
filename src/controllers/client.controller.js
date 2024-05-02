@@ -1,3 +1,4 @@
+// src/controllers/client.controllers.js
 import { User } from '../models/user.model.js';
 import {  Client } from "../models/client.model.js";
 

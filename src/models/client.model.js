@@ -1,4 +1,4 @@
-
+// src/models/client.models.js
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/db.config.js";
 

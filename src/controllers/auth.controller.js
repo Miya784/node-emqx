@@ -1,3 +1,4 @@
+// src/controllers/auth.controllers.js
 import bcrypt from "bcrypt";
 import { User } from "../models/user.model.js";
 import {  Client } from "../models/client.model.js";

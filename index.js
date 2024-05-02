@@ -1,3 +1,4 @@
+// index.js
 import { config } from "./src/config/loadenv.js";
 import dbConfig from "./src/config/db.config.js";
 import express from "express";
