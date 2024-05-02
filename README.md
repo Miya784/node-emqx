@@ -1,1 +1,1 @@
-[Daigram](/diagram/han.drawio.png?raw=true))
+[Daigram](https://github.com/Miya784/node-emqx/blob/main/diagram/han.drawio.png)
